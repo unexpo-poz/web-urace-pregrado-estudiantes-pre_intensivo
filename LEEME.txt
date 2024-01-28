@@ -1,0 +1,144 @@
+Hola:
+Aqui esta la definicion de las tabla "depositos". El usuario2 debe tener permiso
+para insertar y borrar de esa tabla. el usuario c debe tener permiso para consultar.
+
+OJO! OJO! OJO!: ESTE PROGRAMA ES SOLO PARA QUE LO
+PRUEBES. JAMAS DEBES COLOCARLO EN PRODUCCION!!!
+
+El programa es "casi" igual al de las inscripciones. Las diferencias son:
+
+- El programa incluye una seccion para los depositos. Los depositos deben
+  tener 8 digitos para la planilla.
+- El programa tiene su propio archivo de configuracion en el directorio
+  pint/inc/ . Esto se va a arreglar despues para tener uno solo.
+- En el archivo de configuracion se agregaron variables para definir el
+  vicerrectorado y el valor de unidad tributaria y de la materia.
+- Tenemos dos nuevos archivos javascript:
+
+  * intensivo.js : Se encarga de validar los depositos, marcar las materias,
+                   validar las entradas, revisar los limites de creditos/materias.
+		   Este programa sustituye a inscripcion.js y tiene algunas funciones
+		   que son similares.
+		   
+  * conexdb.js : Funciones que permiten verificar si los depositos
+                 no estan registrados usando la tecnologia AJAX(Asynchronous JavaScript + XML)
+		 Esta tecnologia permite consultar a un servidor web desde javascript y colocar
+		 la respuesta en la pagina actual sin tener que recargar la pagina o hacer un
+		 envio de un formulario (submit). ESTO ES NUEVO Y NO LO HABIA USADO EN LOS
+		 OTROS PROGRAMAS. Pero es perfecto para verificar los depositos.
+		 Mejor te lo explico despues. Por ahora, solo debes saber que
+		 hace el trabajo perfectamete.
+
+--------FUNCIONES EN intensivo.js -----------------------------
+function validar_dep(fd){
+	Valida que todos los depositos cumplan con la regla:
+	planilla de 8 digitos, monto no nulo. Marca en azul
+	los depositos erroneos
+}
+
+function monto_exacto(ft,fd){
+	Devuelve "true" si el monto de los depositos es igual al
+	monto total requerido para las materias seleccionadas
+}
+
+function actualizar_total_dep(fc) {
+	actualiza el total de los depositos
+}
+
+function EsNumero(cTexto,ft, totalizar) {
+	Determina si el dato en la caja de texto es un numero.
+	Si tiene caracteres no numericos los elimina.
+}
+
+function marcarAsignaturas(asignaturas,asigSC) {
+	Marca/desmarca las asignaturas seleccionadas
+}
+
+function prepdata(fp,fd) {
+	Genera las cadenas de datos que se van a enviar en el formulario:
+	materias y depositos
+}
+
+function actualizarTotales(fp,ft,$update) {
+	actualiza en pantalla los totales de materias y U.C.
+}
+   
+function correquisitoOK(fp) {
+	devuelve "true" si la materia seleccionada tiene sus correquisitos
+	correctos
+}
+
+function actualizarSecciones() {
+	actualiza las secciones de las materias seleccionadas
+	despues de un error de seleccion (exceso de creditos o correquisito)
+}
+
+function estadoAnterior(lSeccion){
+	devuelve la seleccion al estado antes del error 
+	(marca/desmarca las materias)
+}
+
+
+function excesoDeCreditos(lSeccion) {
+	devuelve "true" si hay un exceso de creditos
+}
+
+function cambiarColor(lSeccion) {
+	cambia el color de una linea cuando se selecciona/elimina
+	la materia
+}
+
+function resaltar(lSeccion) {
+	resalta la linea indicada llamando a cambiaColor
+	de acuerdo a si se puede o no seleccionar
+}
+
+function borrar_depositos(fd) {
+	borra todos los depositos no registrados cuando se pulsa el
+	boton "borrar"
+}
+
+function reiniciarTodo() {
+	reinicia todos los valores del formulario
+}
+
+function fadePopIE(speed){
+	Devanece/muestra a la velocidad "speed" la ventana de confirmar la inscripcion cuando se
+	pulsa cancelar o cuando ocurre un error. Version para
+	Internet Explorer. (moneria)
+}
+
+function fadePopMOZ(speed){
+	Devanece/muestra a la velocidad "speed" la ventana de confirmar la inscripcion cuando se
+	pulsa cancelar o cuando ocurre un error. Version para
+	Firefox/Netscape. (moneria)
+
+}
+
+function desvanecer(speed) {
+	llama a la funcion adecuada de desvanecer de acuerdo al navegador
+}
+
+function verificar(){
+	verifica que todo esta correcto:
+	depositos, monto total, depositos no repetidos (esto ultimo
+	usando AJAX -- ver el archivo conexdb.js)
+
+}
+ 
+
+function cancelar() {
+	cancela la accion de inscribirse y cierra la ventana de confrimacion
+}
+
+function Inscribirme(){
+	Esta funcion 	Abre la ventana de confirmacion y
+	usa verificar() y cancelar() de acuerdo a si todo esta bien.
+}
+//Funciones para validar la fecha de nacimiento
+function anyoBisiesto(anyo) 
+
+function FechaValida(dia,mes,anyo)
+
+function mostrar_ayuda(ayudaURL) 
+
